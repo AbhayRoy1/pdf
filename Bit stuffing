@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<string.h>
+#define MAX 100
+int main()
+{int si=0,di=0,count=0;
+char flag_byte[]="01111110";
+char src[MAX],dest[MAX]="";
+printf("Enter frame data in binary:\n");
+scanf("%s",src);
+strcat(dest,flag_byte);
+di=strlen(flag_byte);
+while(src[si]!='\0')
+{ if(src[si]=='1')
+count++;
+else
+count=0;
+dest[di++]=src[si++];
+if(count==5)
+{ dest[di++]='0';
+count=0;
+}
+}
+dest[di++]='\0';
+strcat(dest,flag_byte);
+printf("\nBit stuffed frame:\n%s",dest);
+}
+Output:
+Enter frame data in binary:
+10111011111111110
+Bit stuffed frame: 
+011111101110111110111110001111110
