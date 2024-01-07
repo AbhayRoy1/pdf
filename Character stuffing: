@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define MAX 100
+int main()
+{ int si=0,di=0;
+char begin[]="DLE STX",end[]="DLE ETX";
+char src[MAX],dest[MAX]="";
+printf("Enter frame data in ASCII:\n");
+scanf("%s",src);
+strcat(dest,begin);
+di=strlen(begin);
+while(src[si]!='\0')
+{ 
+if(((src[si]=='D')||(src[si]=='d'))&&((src[si+1]=='L')||(src[si+1]=='l'))&&((src[si+2]=='E')||(src[si+2]=
+='e')))
+ { dest[di+0]='D';dest[di+1]='L';dest[di+2]='E';
+dest[di+3]='D';dest[di+4]='L';dest[di+5]='E';
+di+=6;
+si+=3;
+ }
+else
+ {dest[di++]=src[si++];
+ }
+ }
+dest[di]='\0';
+strcat(dest,end);
+printf("\n Character stuffed frame:\n%s",dest);
+}
+Output:
+1) Enter frame data in ASCII:
+BIT
+Character stuffed frame: 
+DLESTX BIT DLE ETX
+2) Enter frame data in ASCII:
+BITDLE
+Character stuffed frame: 
+DLESTX BITDLEDLE DLE ETX
