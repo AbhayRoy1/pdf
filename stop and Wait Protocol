@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+main()
+{
+int i=0,j=1,numframes,x;
+char a[100]="";
+printf("enter number of frames:");
+scanf("%d",&numframes);
+while(numframes>0)
+{ printf("enter data:");
+scanf("%c%*c",&a[i]);
+printf("\nsending frame %d",i+1);
+sleep(3);
+x=rand()%10;
+if((x%10==6)||(x%10==4))
+{
+sleep(5);
+printf("\n error, resend data %d : ",i+1);
+scanf("%c%*c",&a[i]);
+printf("\nresending frame %d", i+1);
+}
+sleep(5);
+printf(" \n ack %d\n",j+1);
+numframes=numframes-1;
+i++;
+j++;
+}
+printf("\n end of stop and wait protocol\n");
+}
