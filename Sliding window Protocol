@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+main()
+{
+int i,j,numframes,x,y,count=0;
+char a[100];
+printf("enter number of frames:\n");
+scanf("%d",&numframes);
+for(i=0;i<numframes;i++)
+{
+printf("enter data %d:\n",i+1);
+scanf("%c%*c",&a[i]);
+x=rand()%10;
+y=rand()%10;
+if(i==x)
+{
+sleep(5);
+printf("nak %d \n\n",i);
+printf(" resend data %d : \n",i);
+scanf("%c%*c",&a[i]);
+}
+if((y!=x)&&(y<x)&&(count<=1))
+{count++;
+sleep(3);
+printf(" ack %d\n",i+1);
+}
+}
+sleep(3);
+printf(" ack %d\n",i+1);
+printf("\n end of sliding window protocol\n");
+}
+Enter the number of frames :
+10
+Enter data 1: 
+h
+Enter data 2: 
+e
+ack 2
+Enter data 3: 
+l
+ack 3
+Enter data 4: 
+l
+Enter data 5: 
+o
+Enter data 6: 
+u
+nak 5
+Resend data 5 :
+o
+Enter data 7:
+o
+Enter dara 8: 
+r
+Enter data 9:
+l
+Enter data 10:
+d
+ack 11 
+End of sliding window protocol
